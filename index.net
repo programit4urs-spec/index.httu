@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Kyoto Traditional Restaurant</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'Noto Serif JP',serif;
+  color:#fff;
+  background-image:url("https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1920");
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
+  overflow-x:hidden;
+}
+
+/* ================= PATTERNS ================= */
+.pattern{
+  position:fixed; inset:0; z-index:-1; pointer-events:none;
+  background-image:
+    url('https://www.transparenttextures.com/patterns/waves.png');
+  opacity:0.08;
+}
+
+/* ================= HEADER ================= */
+header{text-align:center; padding:100px 20px 60px;}
+header h1{font-size:3rem;letter-spacing:4px;}
+header p{margin-top:10px;font-family:'Noto Sans JP',sans-serif;}
+button{margin:5px; padding:10px 20px; border:none;border-radius:25px;cursor:pointer;}
+#soundBtn{background:#f4c2d7;color:#5a2a00;}
+
+/* ================= YASHIKI ================= */
+#yashiki{position:fixed; top:20px; right:20px; font-size:2.5rem; cursor:pointer; z-index:5;}
+#yashikiBox{display:none; position:fixed; top:60px; right:20px; width:300px; max-height:400px; overflow-y:auto;
+  background:rgba(255,221,176,0.95); color:#5a2a00; padding:15px; border-radius:16px; box-shadow:0 8px 20px rgba(0,0,0,0.5);}
+#yashikiBox h3{text-align:center; margin-bottom:10px;}
+
+/* ================= SECTIONS ================= */
+section{max-width:1200px; margin:50px auto; background:rgba(0,0,0,0.65); border-radius:20px; padding:30px; position:relative;}
+section h2{text-align:center; margin-bottom:30px; border-bottom:2px solid #f4c2d7; display:inline-block; padding-bottom:8px;}
+.menu{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px;}
+.card{
+  background:rgba(0,0,0,0.55); padding:18px; border-radius:16px; cursor:pointer; transition:transform .3s, box-shadow .3s; position:relative; overflow:hidden;
+  border:1px solid rgba(255,255,255,0.1);
+}
+.card::before{
+  content:""; position:absolute; inset:0;
+  background-image: url('https://www.transparenttextures.com/patterns/waves.png'); 
+  opacity:0.08; pointer-events:none;
+}
+.card:hover{transform:translateY(-6px) scale(1.03); box-shadow:0 20px 40px rgba(0,0,0,0.5);}
+.card h3{margin-bottom:5px;}
+.card p{font-family:'Noto Sans JP',sans-serif; font-size:.9rem; color:#f4c2d7;}
+.card .price{font-weight:bold; margin-top:5px; color:#ffd6e7;}
+
+/* ================= PETALS ================= */
+.petal{position:fixed; top:-10%; width:14px; height:14px; background:radial-gradient(circle,#ffd6e7,#ffb7d5); border-radius:50% 50% 50% 0; transform:rotate(45deg); animation:fall linear infinite;}
+@keyframes fall{to{transform:translateY(120vh) translateX(80px) rotate(360deg);}}
+
+/* ================= FOOTER ================= */
+footer{text-align:center; padding:40px 20px; background:rgba(0,0,0,0.7); border-top:2px solid #f4c2d7;}
+@media(max-width:600px){header h1{font-size:2rem;} .menu{grid-template-columns:1fr;}}
+</style>
+</head>
+
+<body>
+<div class="pattern"></div>
+
+<header>
+  <h1>Kyoto Traditional Restaurant</h1>
+  <p>No Pork • No Alcohol • Authentic Japanese Cuisine</p>
+  <button id="soundBtn">🎵 Enable Music</button>
+</header>
+
+<div id="yashiki">🏯
+  <div id="yashikiBox">
+    <h3>Your Order</h3>
+    <ul id="orderList"></ul>
+  </div>
+</div>
+
+<!-- ================= JAPANESE SWEETS ================= -->
+<section>
+<h2>🍡 Japanese Sweets</h2>
+<div class="menu">
+  <div class="card" data-name="Sakura Mochi" data-desc="Cherry blossom rice cake" data-price="$3.50"><h3>Sakura Mochi</h3><p>Cherry blossom rice cake</p><p class="price">$3.50</p></div>
+  <div class="card" data-name="Matcha Daifuku" data-desc="Green tea mochi" data-price="$3.00"><h3>Matcha Daifuku</h3><p>Green tea mochi</p><p class="price">$3.00</p></div>
+  <div class="card" data-name="Yatsuhashi" data-desc="Kyoto cinnamon sweet" data-price="$2.50"><h3>Yatsuhashi</h3><p>Kyoto cinnamon sweet</p><p class="price">$2.50</p></div>
+  <div class="card" data-name="Dango" data-desc="Rice dumplings" data-price="$2.80"><h3>Dango</h3><p>Rice dumplings</p><p class="price">$2.80</p></div>
+  <div class="card" data-name="Anmitsu" data-desc="Jelly dessert" data-price="$3.50"><h3>Anmitsu</h3><p>Jelly dessert</p><p class="price">$3.50</p></div>
+  <div class="card" data-name="Warabi Mochi" data-desc="Bracken jelly" data-price="$3.00"><h3>Warabi Mochi</h3><p>Bracken jelly</p><p class="price">$3.00</p></div>
+  <div class="card" data-name="Monaka" data-desc="Wafer & bean paste" data-price="$3.20"><h3>Monaka</h3><p>Wafer & bean paste</p><p class="price">$3.20</p></div>
+  <div class="card" data-name="Taiyaki" data-desc="Fish cake dessert" data-price="$3.50"><h3>Taiyaki</h3><p>Fish cake dessert</p><p class="price">$3.50</p></div>
+  <div class="card" data-name="Kuzumochi" data-desc="Summer sweet" data-price="$2.80"><h3>Kuzumochi</h3><p>Summer sweet</p><p class="price">$2.80</p></div>
+  <div class="card" data-name="Ohagi" data-desc="Rice & red bean" data-price="$3.00"><h3>Ohagi</h3><p>Rice & red bean</p><p class="price">$3.00</p></div>
+  <div class="card" data-name="Botamochi" data-desc="Seasonal rice cake" data-price="$3.00"><h3>Botamochi</h3><p>Seasonal rice cake</p><p class="price">$3.00</p></div>
+  <div class="card" data-name="Castella" data-desc="Sponge cake" data-price="$2.80"><h3>Castella</h3><p>Sponge cake</p><p class="price">$2.80</p></div>
+  <div class="card" data-name="Kinako Mochi" data-desc="Soybean powder" data-price="$2.50"><h3>Kinako Mochi</h3><p>Soybean powder</p><p class="price">$2.50</p></div>
+  <div class="card" data-name="Matcha Ice Cream" data-desc="Green tea" data-price="$3.00"><h3>Matcha Ice Cream</h3><p>Green tea</p><p class="price">$3.00</p></div>
+  <div class="card" data-name="Black Sesame Ice Cream" data-desc="Nutty flavor" data-price="$3.00"><h3>Black Sesame Ice Cream</h3><p>Nutty flavor</p><p class="price">$3.00</p></div>
+</div>
+</section>
+
+<!-- ================= SUSHI ================= -->
+<section>
+<h2>🍣 Sushi</h2>
+<div class="menu">
+  <div class="card" data-name="Maguro" data-desc="Tuna sushi" data-price="$4.50"><h3>Maguro</h3><p>Tuna sushi</p><p class="price">$4.50</p></div>
+  <div class="card" data-name="Sake" data-desc="Salmon sushi" data-price="$4.50"><h3>Sake</h3><p>Salmon sushi</p><p class="price">$4.50</p></div>
+  <div class="card" data-name="Ebi" data-desc="Shrimp sushi" data-price="$4.00"><h3>Ebi</h3><p>Shrimp sushi</p><p class="price">$4.00</p></div>
+  <div class="card" data-name="Unagi" data-desc="Eel sushi" data-price="$5.50"><h3>Unagi</h3><p>Eel sushi</p><p class="price">$5.50</p></div>
+  <div class="card" data-name="Tamago" data-desc="Sweet omelet sushi" data-price="$3.50"><h3>Tamago</h3><p>Sweet omelet sushi</p><p class="price">$3.50</p></div>
+  <div class="card" data-name="Ikura" data-desc="Salmon roe" data-price="$5.00"><h3>Ikura</h3><p>Salmon roe</p><p class="price">$5.00</p></div>
+  <div class="card" data-name="Hamachi" data-desc="Yellowtail sushi" data-price="$5.00"><h3>Hamachi</h3><p>Yellowtail sushi</p><p class="price">$5.00</p></div>
+  <div class="card" data-name="Hirame" data-desc="Flounder sushi" data-price="$4.50"><h3>Hirame</h3><p>Flounder sushi</p><p class="price">$4.50</p></div>
+  <div class="card" data-name="Ika" data-desc="Squid sushi" data-price="$4.00"><h3>Ika</h3><p>Squid sushi</p><p class="price">$4.00</p></div>
+  <div class="card" data-name="Uni" data-desc="Sea urchin sushi" data-price="$6.00"><h3>Uni</h3><p>Sea urchin sushi</p><p class="price">$6.00</p></div>
+  <div class="card" data-name="Tako" data-desc="Octopus sushi" data-price="$4.50"><h3>Tako</h3><p>Octopus sushi</p><p class="price">$4.50</p></div>
+  <div class="card" data-name="Saba" data-desc="Mackerel sushi" data-price="$4.00"><h3>Saba</h3><p>Mackerel sushi</p><p class="price">$4.00</p></div>
+  <div class="card" data-name="Anago" data-desc="Saltwater eel" data-price="$5.50"><h3>Anago</h3><p>Saltwater eel</p><p class="price">$5.50</p></div>
+  <div class="card" data-name="Toro" data-desc="Fatty tuna" data-price="$6.00"><h3>Toro</h3><p>Fatty tuna</p><p class="price">$6.00</p></div>
+  <div class="card" data-name="Kani" data-desc="Crab sushi" data-price="$5.00"><h3>Kani</h3><p>Crab sushi</p><p class="price">$5.00</p></div>
+</div>
+</section>
+
+<!-- ================= JAPANESE FOODS ================= -->
+<section>
+<h2>🍱 Japanese Foods</h2>
+<div class="menu">
+  <div class="card" data-name="Tempura" data-desc="Fried vegetables & seafood" data-price="$7.50"><h3>Tempura</h3><p>Fried vegetables & seafood</p><p class="price">$7.50</p></div>
+  <div class="card" data-name="Onigiri" data-desc="Rice balls" data-price="$2.50"><h3>Onigiri</h3><p>Rice balls</p><p class="price">$2.50</p></div>
+  <div class="card" data-name="Udon" data-desc="Thick noodles soup" data-price="$6.50"><h3>Udon</h3><p>Thick noodles soup</p><p class="price">$6.50</p></div>
+  <div class="card" data-name="Soba" data-desc="Buckwheat noodles" data-price="$6.50"><h3>Soba</h3><p>Buckwheat noodles</p><p class="price">$6.50</p></div>
+  <div class="card" data-name="Katsudon" data-desc="Pork-free cutlet rice" data-price="$8.50"><h3>Katsudon</h3><p>Pork-free cutlet rice</p><p class="price">$8.50</p></div>
+  <div class="card" data-name="Okonomiyaki" data-desc="Japanese pancake" data-price="$7.00"><h3>Okonomiyaki</h3><p>Japanese pancake</p><p class="price">$7.00</p></div>
+  <div class="card" data-name="Takoyaki" data-desc="Octopus balls" data-price="$5.50"><h3>Takoyaki</h3><p>Octopus balls</p><p class="price">$5.50</p></div>
+  <div class="card" data-name="Chawanmushi" data-desc="Steamed egg custard" data-price="$4.50"><h3>Chawanmushi</h3><p>Steamed egg custard</p><p class="price">$4.50</p></div>
+  <div class="card" data-name="Gyudon" data-desc="Beef rice bowl" data-price="$8.00"><h3>Gyudon</h3><p>Beef rice bowl</p><p class="price">$8.00</p></div>
+  <div class="card" data-name="Nasu Dengaku" data-desc="Grilled eggplant" data-price="$5.50"><h3>Nasu Dengaku</h3><p>Grilled eggplant</p><p class="price">$5.50</p></div>
+  <div class="card" data-name="Yakitori" data-desc="Chicken skewers" data-price="$6.00"><h3>Yakitori</h3><p>Chicken skewers</p><p class="price">$6.00</p></div>
+  <div class="card" data-name="Miso Soup" data-desc="Traditional soup" data-price="$2.50"><h3>Miso Soup</h3><p>Traditional soup</p><p class="price">$2.50</p></div>
+  <div class="card" data-name="Karaage" data-desc="Fried chicken" data-price="$6.50"><h3>Karaage</h3><p>Fried chicken</p><p class="price">$6.50</p></div>
+  <div class="card" data-name="Oden" data-desc="Stew with vegetables" data-price="$5.50"><h3>Oden</h3><p>Stew with vegetables</p><p class="price">$5.50</p></div>
+  <div class="card" data-name="Tamagoyaki" data-desc="Sweet omelet" data-price="$3.50"><h3>Tamagoyaki</h3><p>Sweet omelet</p><p class="price">$3.50</p></div>
+
+  <!-- New items -->
+  <div class="card" data-name="Shoyu Ramen" data-desc="Soy sauce ramen" data-price="$9.50"><h3>Shoyu Ramen</h3><p>Soy sauce ramen</p><p class="price">$9.50</p></div>
+  <div class="card" data-name="Miso Ramen" data-desc="Miso flavor ramen" data-price="$9.50"><h3>Miso Ramen</h3><p>Miso flavor ramen</p><p class="price">$9.50
+  <!-- New items continued -->
+  <div class="card" data-name="Shoyu Ramen" data-desc="Soy sauce ramen with noodles and vegetables" data-price="$9.50"><h3>Shoyu Ramen</h3><p>Soy sauce ramen with noodles and vegetables</p><p class="price">$9.50</p></div>
+  <div class="card" data-name="Miso Ramen" data-desc="Miso flavored ramen with pork-free broth" data-price="$9.50"><h3>Miso Ramen</h3><p>Miso flavored ramen with pork-free broth</p><p class="price">$9.50</p></div>
+
+  <!-- Japanese Steaks -->
+  <div class="card" data-name="Wagyu Steak" data-desc="Premium Japanese beef steak" data-price="$22.00"><h3>Wagyu Steak</h3><p>Premium Japanese beef steak</p><p class="price">$22.00</p></div>
+  <div class="card" data-name="Teriyaki Steak" data-desc="Grilled steak with teriyaki sauce" data-price="$18.50"><h3>Teriyaki Steak</h3><p>Grilled steak with teriyaki sauce</p><p class="price">$18.50</p></div>
+  <div class="card" data-name="Ginger Steak" data-desc="Steak with ginger sauce" data-price="$18.00"><h3>Ginger Steak</h3><p>Steak with ginger sauce</p><p class="price">$18.00</p></div>
+  <div class="card" data-name="Garlic Steak" data-desc="Steak with garlic butter" data-price="$19.00"><h3>Garlic Steak</h3><p>Steak with garlic butter</p><p class="price">$19.00</p></div>
+  <div class="card" data-name="Yakiniku Steak" data-desc="Japanese BBQ style steak" data-price="$20.00"><h3>Yakiniku Steak</h3><p>Japanese BBQ style steak</p><p class="price">$20.00</p></div>
+
+  <!-- Japanese Pancakes -->
+  <div class="card" data-name="Dorayaki" data-desc="Red bean pancake sandwich" data-price="$4.50"><h3>Dorayaki</h3><p>Red bean pancake sandwich</p><p class="price">$4.50</p></div>
+  <div class="card" data-name="Okonomiyaki" data-desc="Savory Japanese pancake" data-price="$7.00"><h3>Okonomiyaki</h3><p>Savory Japanese pancake</p><p class="price">$7.00</p></div>
+
+  <!-- Japanese Hot Chocolate -->
+  <div class="card" data-name="Japanese Hot Chocolate" data-desc="Rich and creamy hot cocoa with matcha" data-price="$5.00"><h3>Japanese Hot Chocolate</h3><p>Rich and creamy hot cocoa with matcha</p><p class="price">$5.00</p></div>
+</div>
+</section>
+
+<footer>
+  <p>© 2026 Kyoto Traditional Restaurant • All Rights Reserved</p>
+</footer>
+
+<audio id="bgMusic" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+<audio id="clickSound" src="https://www.fesliyanstudios.com/play-mp3/387"></audio>
+
+<script>
+// ================= Yashiki Order =================
+const yashiki = document.getElementById("yashiki");
+const yashikiBox = document.getElementById("yashikiBox");
+const orderList = document.getElementById("orderList");
+yashiki.addEventListener("click", () => {
+  yashikiBox.style.display = yashikiBox.style.display==="block" ? "none" : "block";
+});
+
+const cards = document.querySelectorAll(".card");
+cards.forEach(card => {
+  card.addEventListener("click", () => {
+    const name = card.getAttribute("data-name");
+    const price = card.getAttribute("data-price");
+    const li = document.createElement("li");
+    li.textContent = `${name} - ${price}`;
+    orderList.appendChild(li);
+    document.getElementById("clickSound").play();
+  });
+});
+
+// ================= Music =================
+const musicBtn = document.getElementById("soundBtn");
+const bgMusic = document.getElementById("bgMusic");
+musicBtn.addEventListener("click", () => {
+  if(bgMusic.paused){ bgMusic.play(); musicBtn.textContent="🔇 Pause Music"; }
+  else{ bgMusic.pause(); musicBtn.textContent="🎵 Enable Music"; }
+});
+
+// ================= Sakura Petals =================
+function createPetals(){
+  const petal = document.createElement("div");
+  petal.className="petal";
+  petal.style.left=Math.random()*100+"vw";
+  petal.style.animationDuration=(5+Math.random()*5)+"s";
+  petal.style.fontSize=(10+Math.random()*10)+"px";
+  document.body.appendChild(petal);
+  setTimeout(()=>{petal.remove();},10000);
+}
+setInterval(createPetals,300);
+</script>
+</body>
+</html>
